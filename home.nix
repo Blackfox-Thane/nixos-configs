@@ -42,6 +42,7 @@ in
 		fuzzel
 		alacritty
 		kitty
+		mangowc
 	];
 
 	xdg.configFile = builtins.mapAttrs
