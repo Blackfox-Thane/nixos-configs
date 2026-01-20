@@ -11,7 +11,7 @@
 							priority = 1;
 							label = "boot";
 							name = "ESP";
-							size = "512G";
+							size = "512M";
 							type = "EF00";
 							content = {
 								type = "filesystem";
