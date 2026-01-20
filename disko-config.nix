@@ -26,7 +26,7 @@
 								type = "btrfs";
 								extraArgs = [ "-f" ];
 								subvolumes = {
-									"/" = {
+									"/rootfs" = {
 										mountpoint = "/";
 									};
 									"/home" = {
