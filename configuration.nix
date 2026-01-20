@@ -12,7 +12,8 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.enable = true;
+  boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nogi-nixos"; # Define your hostname.
@@ -97,7 +98,7 @@
           enable = true;
           ports = [ 22 ];
           settings = {
-        	  PasswordAuthentication = true;
+        	  PasswordAuthentication = false;
         	  AllowUsers = null;
         	  UseDns = true;
         	  X11Forwarding = false;
