@@ -74,6 +74,7 @@
     wget
     git
     alacritty
+    kitty
     openssh
   ];
 
