@@ -32,7 +32,7 @@
 		  ./configuration.nix
 			disko.nixosModules.disko
 			mango.nixosModules.mango
-			home-manager.nixosModules.home-manager
+			inputs.home-manager.nixosModules.default
 		  ];
 		};
 	  };
