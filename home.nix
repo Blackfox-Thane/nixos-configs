@@ -47,6 +47,7 @@ in
 		kitty
 		mangowc
 		yazi
+		waybar
 	];
 
 	xdg.configFile = builtins.mapAttrs
