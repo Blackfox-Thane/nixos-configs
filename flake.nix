@@ -18,7 +18,7 @@
 	};
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, mango, ... }:
+  outputs = { self, nixpkgs, disko, home-manager, mango, ... }@inputs:
 	let 
 	  lib = nixpkgs.lib;
 	  system = "x86_64-linux";
@@ -28,7 +28,12 @@
 		nogitsune = lib.nixosSystem {
 		  inherit system;
 		  specialArgs = {inherit inputs;};
-		  modules = [ ./configuration.nix ];
+		  modules = [
+		  ./configuration.nix
+			disko.nixModules.disko
+			mango.nixosModules.mango
+			home-manager.nixosModules.home-manager
+		  ];
 		};
 	  };
 	  homeConfgurations = {

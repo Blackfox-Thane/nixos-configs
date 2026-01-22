@@ -8,7 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./disko-config.nix
+	  #./disko-bare.nix
+	  ./disko-VM.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -16,7 +17,7 @@
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nogi-nixos"; # Define your hostname.
+  networking.hostName = "nogitsune"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -100,6 +101,15 @@
         	  X11Forwarding = false;
         	  PermitRootLogin = "prohibit-password";
           };
+  };
+
+  home-manager = {
+	useGlobalPkgs = true;
+	useUserPackages = true;
+	specialArgs = { inherit inputs; };
+	users = {
+	  "thane" = import ./home.nix;
+	};
   };
 
   # Open ports in the firewall.
