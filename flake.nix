@@ -1,37 +1,42 @@
 {
-	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		disko = {
-			url = "github:nix-community/disko";
-			inputs.nixpkgs.follows = "nixpkgs";
+  description = "My personal flake";
+
+  inputs = {
+	nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+	disko = {
+	  url = "github:nix-community/disko";
+	  inputs.nixpkgs.follows = "nixpkgs";
+	};
+	home-manager = {
+	  url = "github:nix-community/home-manager";
+	  inputs.nixpkgs.follows = "nixpkgs";
+	};
+	mango = {
+	  url = "github:DreamMaoMao/mango";
+	  inputs.nixpkgs.follows = "nixpkgs";
+	};
+  };
+
+  outputs = { self, nixpkgs, disko, home-manager, mango, ... }:
+	let 
+	  lib = nixpkgs.lib;
+	  system = "x86_64-linux";
+	  pkgs = nixpkgs.legacyPackages.${system};
+	in {
+	  nixosConfigurations = {
+		nogitsune = lib.nixosSystem {
+		  inherit system;
+		  specialArgs = {inherit inputs;};
+		  modules = [ ./configuration.nix ];
 		};
-		home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
+	  };
+	  homeConfgurations = {
+		nogitsune = home-manager.lib.homeManagerConfguration {
+		  inherit pkgs;
+		  modules = [ ./home.nix ];
 		};
-		mango = {
-			url = "github:DreamMaoMao/mango";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+	  };
 	};
 
-	outputs = inputs@{ self, nixpkgs, disko, home-manager, mango, ... }: {
-		nixosConfigurations.nogi-nixos = nixpkgs.lib.nixosSystem {
-			system = "x86_64-linux";
-			modules = [
-				./configuration.nix
-					inputs.disko.nixosModules.disko
-					home-manager.nixosModules.home-manager
-					mango.nixosModules.mango
-					{
-						home-manager = {
-							useGlobalPkgs = true;
-							useUserPackages = true;
-							users.thane = import ./home.nix;
-						};
-						programs.mango.enable = true;
-					}
-			];
-		};
-	};
 }
