@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 let
-dotfiles = "${config.home.homeDirectory}/.dotfiles/config";
-create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
-configs = {
+  configs = {
 	alacritty = "alacritty";
 	kitty = "kitty";
 	mango = "mango";
@@ -13,47 +13,42 @@ configs = {
 	waybar = "waybar";
 	yazi = "yazi";
 	zsh = "zsh";
-};
+  };
 in
 
-{
-	home.username = "thane";
-	home.homeDirectory = "/home/thane";
-	home.stateVersion = "25.11";
-
-	programs.git = {
-		enable = true;
-		settings = {
-			user = {
-				name = "Blackfox-Thane";
-				email = "blackshadowxv15@gmail.com";
-			};
-		init.defaultBranch = "main";
-		};
+  {
+  home.username = "thane";
+  home.homeDirectory = "/home/thane";
+  home.stateVersion = "25.11";
+  programs.git = {
+	enable = true;
+	settings = {
+	  user = {
+		name = "Blackfox-Thane";
+		email = "blackshadowxv15@gmail.com";
+	  };
+	  init.defaultBranch = "main";
 	};
-
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
-			nrs = "sudo nixos-rebuild switch --flake $HOME/.dotfiles#nogitsune";
-		};
+  };
+  programs.bash = {
+	enable = true;
+	shellAliases = {
+	  #config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
+	  nrs = "sudo nixos-rebuild switch --flake ./#nogitsune";
 	};
+  };
+  home.packages = with pkgs; [
+	neovim
+	fuzzel
+	kitty
+  ];
 
-	home.packages = with pkgs; [
-		neovim
-		fuzzel
-		alacritty
-		kitty
-		mangowc
-		yazi
-		waybar
-	];
-
-	xdg.configFile = builtins.mapAttrs
-		(name: subpath: {
-		 source = create_symlink "${dotfiles}/${subpath}";
-		 recursive = true;
-		 })
+  xdg.configFile = builtins.mapAttrs
+	(name: subpath: {
+	  source = create_symlink "${dotfiles}/${subpath}";
+	  recursive = true;
+	})
 	configs;
+
+
 }

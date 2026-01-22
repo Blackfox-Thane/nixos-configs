@@ -33,6 +33,9 @@
 			disko.nixosModules.disko
 			mango.nixosModules.mango
 			inputs.home-manager.nixosModules.default
+			{
+			  program.mango.enable = true;
+			};
 		  ];
 		};
 	  };
