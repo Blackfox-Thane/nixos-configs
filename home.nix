@@ -20,6 +20,7 @@ in
 	home.username = "thane";
 	home.homeDirectory = "/home/thane";
 	home.stateVersion = "25.11";
+
 	programs.git = {
 		enable = true;
 		settings = {
@@ -30,19 +31,22 @@ in
 		init.defaultBranch = "main";
 		};
 	};
+
 	programs.bash = {
 		enable = true;
 		shellAliases = {
 			config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
-			nrs = "sudo nixos-rebuild switch --flake $HOME/nixos-dotfiles#nogi-nixos";
+			nrs = "sudo nixos-rebuild switch --flake $HOME/.dotfiles#nogitsune";
 		};
 	};
+
 	home.packages = with pkgs; [
 		neovim
 		fuzzel
 		alacritty
 		kitty
 		mangowc
+		yazi
 	];
 
 	xdg.configFile = builtins.mapAttrs
@@ -51,6 +55,4 @@ in
 		 recursive = true;
 		 })
 	configs;
-
-
 }
