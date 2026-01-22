@@ -30,7 +30,7 @@
 		  specialArgs = {inherit inputs;};
 		  modules = [
 		  ./configuration.nix
-			disko.nixModules.disko
+			disko.nixosModules.disko
 			mango.nixosModules.mango
 			home-manager.nixosModules.home-manager
 		  ];
