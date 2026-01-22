@@ -22,7 +22,7 @@
 			};
 			root = {
 			  size = "100%";
-			  partitions = 2;
+			  priority = 2;
 			  content = {
 				type = "btrfs";
 				extraArgs = [ "-f" ];

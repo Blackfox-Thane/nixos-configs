@@ -29,13 +29,13 @@
 		  inherit system;
 		  specialArgs = {inherit inputs;};
 		  modules = [
-		  ./configuration.nix
+			./configuration.nix
 			disko.nixosModules.disko
 			mango.nixosModules.mango
-			inputs.home-manager.nixosModules.default
+			home-manager.nixosModules.default
 			{
-			  program.mango.enable = true;
-			};
+			  programs.mango.enable = true;
+			}
 		  ];
 		};
 	  };
@@ -46,5 +46,4 @@
 		};
 	  };
 	};
-
 }

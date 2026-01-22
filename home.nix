@@ -19,7 +19,8 @@ in
   {
   home.username = "thane";
   home.homeDirectory = "/home/thane";
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
+
   programs.git = {
 	enable = true;
 	settings = {
@@ -30,6 +31,7 @@ in
 	  init.defaultBranch = "main";
 	};
   };
+
   programs.bash = {
 	enable = true;
 	shellAliases = {
@@ -37,6 +39,7 @@ in
 	  nrs = "sudo nixos-rebuild switch --flake ./#nogitsune";
 	};
   };
+
   home.packages = with pkgs; [
 	neovim
 	fuzzel

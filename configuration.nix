@@ -106,7 +106,7 @@
   home-manager = {
 	useGlobalPkgs = true;
 	useUserPackages = true;
-	specialArgs = { inherit inputs; };
+	extraSpecialArgs = { inherit inputs; };
 	users = {
 	  "thane" = import ./home.nix;
 	};
