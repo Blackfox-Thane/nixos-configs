@@ -36,7 +36,15 @@ in
 	enable = true;
 	shellAliases = {
 	  #config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
-	  nrs = "sudo nixos-rebuild switch --flake ./#nogitsune";
+	  nrs = "sudo nixos-rebuild switch --flake .#nogitsune";
+	};
+  };
+
+  programs.zsh = {
+	enable = true;
+	shellAliases = {
+	  #config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
+	  nrs = "sudo nixos-rebuild switch --flake .#nogitsune";
 	};
   };
 
@@ -48,6 +56,8 @@ in
 	neovim
 	fuzzel
 	kitty
+	yazi
+	fastfetch
   ];
 
   xdg.configFile = builtins.mapAttrs
@@ -56,6 +66,4 @@ in
 	  recursive = true;
 	})
 	configs;
-
-
 }

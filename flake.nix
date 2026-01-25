@@ -18,7 +18,7 @@
 	};
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, mango, ... }@inputs:
+  outputs = inputs@{ self, nixpkgs, disko, home-manager, mango, ... }:
 	let 
 	  lib = nixpkgs.lib;
 	  system = "x86_64-linux";
@@ -27,22 +27,24 @@
 	  nixosConfigurations = {
 		nogitsune = lib.nixosSystem {
 		  inherit system;
-		  specialArgs = {inherit inputs;};
 		  modules = [
 			./configuration.nix
 			disko.nixosModules.disko
 			mango.nixosModules.mango
-			home-manager.nixosModules.default
+			home-manager.nixosModules.home-manager
 			{
-			  programs.mango.enable = true;
+			  home-manager = {
+				useGlobalPkgs = true;
+				useUserPackages = true;
+				users.thane = import ./home.nix;
+				backupFileExtension = "backup";
+			  };
+
+			  programs.mango = {
+				enable = true;
+			  };
 			}
 		  ];
-		};
-	  };
-	  homeConfgurations = {
-		nogitsune = home-manager.lib.homeManagerConfguration {
-		  inherit pkgs;
-		  modules = [ ./home.nix ];
 		};
 	  };
 	};
