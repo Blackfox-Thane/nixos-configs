@@ -19,7 +19,7 @@ in
   {
   home.username = "thane";
   home.homeDirectory = "/home/thane";
-  home.stateVersion = "26.05";
+  home.stateVersion = "25.11";
 
   programs.git = {
 	enable = true;
@@ -56,6 +56,7 @@ in
 	neovim
 	fuzzel
 	kitty
+	alacritty
 	yazi
 	fastfetch
   ];

@@ -32,7 +32,6 @@
 	vim 
 	wget
 	git
-	alacritty
   ];
 
   fonts.packages = with pkgs; [
