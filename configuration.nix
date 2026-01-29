@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ 
+	[ 
 	  ./hardware-configuration.nix
 	];
 
@@ -22,16 +22,16 @@
 
   users.users.thane = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
     ];
   };
 
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    git
+	vim 
+	wget
+	git
 	alacritty
   ];
 
@@ -51,6 +51,11 @@
         	  PermitRootLogin = "prohibit-password";
           };
   };
+
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

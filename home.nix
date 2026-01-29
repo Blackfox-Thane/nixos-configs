@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+  dotfiles = "${config.home.homeDirectory}/nixdots/configs";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
   configs = {
@@ -36,7 +36,7 @@ in
 	enable = true;
 	shellAliases = {
 	  #config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
-	  nrs = "sudo nixos-rebuild switch --flake .#nogitsune";
+	  nrs = "sudo nixos-rebuild switch --flake ~/nixdots#nogitsune";
 	};
   };
 
@@ -44,7 +44,7 @@ in
 	enable = true;
 	shellAliases = {
 	  #config-nix = "/usr/bin/git --git-dir=$HOME/DotfilesBare/nixos-bare --work-tree=$HOME/DotfilesBare";
-	  nrs = "sudo nixos-rebuild switch --flake .#nogitsune";
+	  nrs = "sudo nixos-rebuild switch --flake ~/nixdots#nogitsune";
 	};
   };
 
