@@ -6,7 +6,7 @@
 	  ./hardware-configuration.nix
 	];
 
-  boot.loader.refind.enable = true;
+  boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nogitsune";
