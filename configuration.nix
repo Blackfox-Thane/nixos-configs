@@ -4,6 +4,7 @@
   imports =
 	[ 
 	  ./hardware-configuration.nix
+	  ./disko-conf.nix
 	];
 
   boot.loader.limine.enable = true;
